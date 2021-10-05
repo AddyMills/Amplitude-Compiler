@@ -530,9 +530,9 @@ def createMoggAudio(songData):
                   songData.flow1, songData.flow2, songData.flow3, songData.bg_track]
     print("\nCreating single multitrack ogg file")
     if songData.ps4mode == True:
-        makeogg = subprocess.Popen(['./executables/sox-14.4.2/sox.exe','-C 3','-M',tracksData[0],tracksData[1],tracksData[2],tracksData[3],tracksData[4],tracksData[5],tracksData[6],tracksData[7],tracksData[8],tracksData[9], './temp/temp2.ogg'])
+        makeogg = subprocess.Popen(['./executables/sox-14.4.2/sox.exe','-M',tracksData[0],tracksData[1],tracksData[2],tracksData[3],tracksData[4],tracksData[5],tracksData[6],tracksData[7],tracksData[8],tracksData[9],'-C 5', './temp/temp.ogg'])
     else:
-        makeogg = subprocess.Popen(['./executables/sox-14.4.2/sox.exe','-M',tracksData[0],tracksData[1],tracksData[2],tracksData[3],tracksData[4],tracksData[5],tracksData[6],tracksData[9], './temp/temp.ogg'])
+        makeogg = subprocess.Popen(['./executables/sox-14.4.2/sox.exe','-M',tracksData[0],tracksData[1],tracksData[2],tracksData[3],tracksData[4],tracksData[5],tracksData[6],tracksData[9],'-C 5', './temp/temp.ogg'])
     programProgress(makeogg, 0)
     if makeogg.returncode == 0:
         print("Success!")
