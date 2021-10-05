@@ -33,9 +33,9 @@ Clicking **Game Data** at the top will take you to the window allowing you to se
 
 ![image](https://user-images.githubusercontent.com/74471839/136066494-08b9c0f5-eba9-4577-8188-a5c2f601e419.png)
 
-The *Att.* fields allow you to enter in how much attenuation (volume reduction) your stem should have when it's not being played.
-
 Here you can search for all your audio files. Please be aware **all** fields must be filled in with something. If you are not using multitracks, go into the *silence* folder of the programs folder and select a silenced track based on your audio input.
+
+The *Att.* fields allow you to enter in how much attenuation (volume reduction) your stem should have when it's not being played.
 
 Clicking on *Compiler* at the top and selecting *PS4 Mode* will enable the two disabled flow tracks.
 
