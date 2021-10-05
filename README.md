@@ -23,7 +23,7 @@ Clicking **Generate!** will open up a save prompt.
 
 _Song Compiler_ opens up a window similar to Rock Band 3's Magma. This portion of the program consists of two windows.
 
-The first is the **Meta Data** screen allowing you to fill in all the song's meta data:
+The first is the **Metadata** screen allowing you to fill in all the song's metadata:
 
 ![image](https://user-images.githubusercontent.com/74471839/136066272-48c362a5-697b-4add-9300-b472c2a2e79b.png)
 
@@ -35,13 +35,15 @@ Clicking **Game Data** at the top will take you to the window allowing you to se
 
 Here you can search for all your audio files. Please be aware **all** fields must be filled in with something. If you are not using multitracks, go into the *silence* folder of the programs folder and select a silenced track based on your audio input.
 
+The *Att.* fields allow you to enter in how much attenuation (volume reduction) your stem should have when it's not being played.
+
 Clicking on *Compiler* at the top and selecting *PS4 Mode* will enable the two disabled flow tracks.
 
 Currently supported audio files are .wav, .mp3, .ogg, and .flac files. Please be aware they must already be in game condition to compile properly (similar to Magma).
 
 All fields have tooltips if you're unsure what the field is for.
 
-When hitting **Compile!**, the program will grab all fields as data and feed them into SoX to make a multitrack .ogg file. This step can take anywhere from 30 - 90 seconds (more or less depending on song length). Please be aware your files will be named after folder it's in. It's assumed that you want to play this right away, so please name the folder after your song (no spaces allowed, and should all be lowercase).
+When hitting **Compile!**, the program will grab all fields as data and feed them into SoX to make a multitrack .ogg file. This step can take anywhere from 30 - 90 seconds (more or less depending on song length). Please be aware your files will be named after the folder it's in. It's assumed that you want to play this right away, so please name the folder after your song (no spaces allowed, and should all be lowercase).
 
 After the multitrack ogg is created, it will get fed into ogg2mogg and then placed into your folder.
 
