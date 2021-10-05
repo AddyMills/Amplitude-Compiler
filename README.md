@@ -18,8 +18,8 @@ are GPLed and/or may have licensing problems, so they can be disabled
 at configure time with the relevant--with-* options. If libsox is built
 with such libraries, it must be distributed under the GPL.
 
-Included with SoX are files and/or code from the following groups:
-* SoX - http://sox.sourceforge.net
+Included with SoX are files and/or code from the following group(s):
+
 * FLAC - http://flac.sourceforge.net
 * LADSPA - http://www.ladspa.org
 * libid3tag - http://www.underbit.com/products/mad
@@ -29,7 +29,14 @@ Included with SoX are files and/or code from the following groups:
 * PNG - http://www.libpng.org/pub/png
 * WavPack - http://www.wavpack.com
 
-Source found at - http://sox.sourceforge.net
+SoX source found at - http://sox.sourceforge.net
 
 ### ogg2mogg
 By Michael Tolly
+
+Included with ogg2mogg are files and/or code from the following group(s):
+
+* Vorbis - Copyright (c) 2002-2020 Xiph.org Foundation
+  * https://github.com/xiph/vorbis
+
+ogg2mogg source found at - https://github.com/mtolly/ogg2mogg
