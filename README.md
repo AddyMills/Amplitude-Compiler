@@ -54,6 +54,20 @@ Temporary files can take up to 70MB of space (can be larger for long, multitrack
 * Insert silent tracks more easily. I'd like to implement a feature where you can right click on the input field to select your silent track.
 * One of my most wanted features to add are quick sanity checks for midi files. They will not be as verbose as the Magma Compiler, but more to check for notes that are too close together (like the "Crystal" double note), or to check for any chords present as Amplitude is single notes only.
 
+## Modules Needed
+If you'd like to use the script version, please make sure you have the following modules. They're all used in some capacity:
+* PySimpleGUI
+* collections
+* json
+* mido
+* os
+* shutil
+* soundfile
+* subprocess
+* sys
+
+They are either included by default, or can be installed with pip
+
 ## Licensing
 Distributed under the GPLv3 license. Please see LICENSE for more information.
 
