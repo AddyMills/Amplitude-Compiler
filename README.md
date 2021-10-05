@@ -23,7 +23,7 @@ Clicking **Generate!** will open up a save prompt.
 
 _Song Compiler_ opens up a window similar to Rock Band 3's Magma. This portion of the program consists of two windows.
 
-The first is the **Meta Data** screen allowing you to fill in all the song's meta data:
+The first is the **Metadata** screen allowing you to fill in all the song's metadata:
 
 ![image](https://user-images.githubusercontent.com/74471839/136066272-48c362a5-697b-4add-9300-b472c2a2e79b.png)
 
