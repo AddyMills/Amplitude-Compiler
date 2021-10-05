@@ -11,11 +11,15 @@ When loading the program you'll be greeted by the main screen:
 
 ![image](https://user-images.githubusercontent.com/74471839/136065771-e8e4ad01-0325-477e-bc94-0548dc75ed9e.png)
 
+### MIDI Starter
+
 _MIDI Starter_ opens a GUI version of my previous program [_Amp Starter_](https://github.com/AddyMills/AmpStarter) allowing you to easily create a MIDI file with your instrument specifications:
 
 ![image](https://user-images.githubusercontent.com/74471839/136066076-789f4662-2ec2-4c28-bcf6-30fc94d7a666.png)
 
 Clicking **Generate!** will open up a save prompt.
+
+### Song Compiler
 
 _Song Compiler_ opens up a window similar to Rock Band 3's Magma. This portion of the program consists of two windows.
 
