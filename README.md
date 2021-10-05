@@ -33,7 +33,7 @@ Clicking **Game Data** at the top will take you to the window allowing you to se
 
 ![image](https://user-images.githubusercontent.com/74471839/136066494-08b9c0f5-eba9-4577-8188-a5c2f601e419.png)
 
-Here you can search for all your audio files. Please be aware **all** fields must be filled in with something. If you are not using multitracks, you can right click the fields and select a silenced track based on your audio input.
+Here you can search for all your audio files. Please be aware **all** fields must be filled in with something. If you are not using multitracks, go into the *silence* folder of the programs folder and select a silenced track based on your audio input.
 
 Clicking on *Compiler* at the top and selecting *PS4 Mode* will enable the two disabled flow tracks.
 
@@ -51,6 +51,7 @@ Temporary files can take up to 70MB of space (can be larger for long, multitrack
 
 * Allow dragging and dropping of files
 * Keep settings similar between uses (i.e. remembering PS4 mode).
+* Insert silent tracks more easily. I'd like to implement a feature where you can right click on the input field to select your silent track.
 * One of my most wanted features to add are quick sanity checks for midi files. They will not be as verbose as the Magma Compiler, but more to check for notes that are too close together (like the "Crystal" double note), or to check for any chords present as Amplitude is single notes only.
 
 ## Licensing
