@@ -371,7 +371,8 @@ def getAudioData(songData):
             att.append(attData[x])
             channels += data.channels
         except:
-            print("Track not found... Continuing")
+            pass
+            #print("Track not found... Continuing")
     return tracks, att, channels
 
 
@@ -455,10 +456,10 @@ def makeMoggSong(songData):
         print("(vols (" + vols + "))")
         print("\n;-------------------- ATTENUATION --------------")
         if songData.ps4mode == True:
-            print("(active_track_db 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
+            print("(active_track_db (0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
         else:
-            print("active_track_db 0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
-        print("\n; Amplitude settings\n (arena_path ConstructoP2)")
+            print("active_track_db (0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
+        print("\n; Amplitude settings\n(arena_path ConstructoP2)")
         # Insert score_goal algorithm here
         print(
             "\n(tunnel_scale 1.0)  ; fudge factor controlling speed of arena travel \n(enable_order (1 2 3 4 5 6)) ; 1-based")
@@ -477,7 +478,7 @@ def makeMoggSong(songData):
         print("(unlock_requirement unlock_requirement_playcount)")
         print("(bpm " + songData.bpm + ")\n")
 
-        print("(preview_start " + songData.preview_start + ")")
+        print("(preview_start_ms " + songData.preview_start + ")")
         print("(preview_length_ms " + lessCountin(songData.preview_end, songData.preview_start) + ")")
     sys.stdout = original_stdout
     print("Save Complete")
