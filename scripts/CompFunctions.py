@@ -466,7 +466,7 @@ def makeMoggSong(songData):
         print("\n; first bar of each section \n(section_start_bars", lessCountin(songData.gates[0], countin),
               lessCountin(songData.gates[1], countin), lessCountin(songData.gates[2], countin) + ")")
         print(";; META DATA")
-        print("(title \"" + songData.title + "\")")
+        print("(title \"{}\")".format(songData.title))
         if songData.title_short != '':
             print("(title_short \"" + songData.title_short + "\")")
         print("(artist \"" + songData.artist + "\")")
