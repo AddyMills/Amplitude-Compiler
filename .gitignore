@@ -2,3 +2,17 @@
 Amplitude Custom Suite.exe
 *.7z
 *.pyc
+Amplitude Custom Suite.spec
+build/Amplitude Custom Suite/Amplitude Custom Suite.exe.manifest
+build/Amplitude Custom Suite/Analysis-00.toc
+build/Amplitude Custom Suite/base_library.zip
+build/Amplitude Custom Suite/EXE-00.toc
+build/Amplitude Custom Suite/PKG-00.pkg
+build/Amplitude Custom Suite/PKG-00.toc
+build/Amplitude Custom Suite/PYZ-00.pyz
+build/Amplitude Custom Suite/PYZ-00.toc
+build/Amplitude Custom Suite/Tree-00.toc
+build/Amplitude Custom Suite/Tree-01.toc
+build/Amplitude Custom Suite/Tree-02.toc
+build/Amplitude Custom Suite/warn-Amplitude Custom Suite.txt
+build/Amplitude Custom Suite/xref-Amplitude Custom Suite.html
