@@ -15,7 +15,7 @@ When loading the program you'll be greeted by the main screen:
 
 _MIDI Starter_ opens a GUI version of my previous program [_Amp Starter_](https://github.com/AddyMills/AmpStarter) allowing you to easily create a MIDI file with your instrument specifications:
 
-![image](https://user-images.githubusercontent.com/74471839/136066076-789f4662-2ec2-4c28-bcf6-30fc94d7a666.png)
+![image](https://user-images.githubusercontent.com/74471839/136855828-163f364c-adb8-42e4-afed-9c00f668fb10.png)
 
 Clicking **Generate!** will open up a save prompt.
 
@@ -25,13 +25,13 @@ _Song Compiler_ opens up a window similar to Rock Band 3's Magma. This portion o
 
 The first is the **Metadata** screen allowing you to fill in all the song's metadata:
 
-![image](https://user-images.githubusercontent.com/74471839/136066272-48c362a5-697b-4add-9300-b472c2a2e79b.png)
+![image](https://user-images.githubusercontent.com/74471839/136858205-9a216e9d-29c3-4347-8839-912a0d54d46d.png)
 
 By default, all values entered will be from the perspective of your MIDI creation program. If you want to the song to end at measure 113, you enter that in the length field. If you would prefer to use the values that are present in the .moggsong file instead, click on "Use Raw Values". This mode will require you to enter the data as the game wants it (i.e. have the end be 5 measures before the actual number). This is for advanced users and most people would use the values as you see in the MIDI file instead.
 
 Clicking **Game Data** at the top will take you to the window allowing you to select your MIDI and Audio files:
 
-![image](https://user-images.githubusercontent.com/74471839/136066494-08b9c0f5-eba9-4577-8188-a5c2f601e419.png)
+![image](https://user-images.githubusercontent.com/74471839/136858227-c516dc4c-cf4e-47e2-9e55-bebdc415ef1f.png)
 
 Here you can search for all your audio files. Please be aware **all** fields must be filled in with something. If you are not using multitracks, go into the *silence* folder of the programs folder and select a silenced track based on your audio input.
 
