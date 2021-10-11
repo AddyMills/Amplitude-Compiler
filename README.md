@@ -43,7 +43,9 @@ Currently supported audio files are .wav, .mp3, .ogg, and .flac files. Please be
 
 All fields have tooltips if you're unsure what the field is for.
 
-When hitting **Compile!**, the program will grab all fields as data and feed them into SoX to make a multitrack .ogg file. This step can take anywhere from 30 - 90 seconds (more or less depending on song length). Please be aware your files will be named after the folder it's in. It's assumed that you want to play this right away, so please name the folder after your song (no spaces allowed, and should all be lowercase).
+**Export Moggsong** allows you to generate just the moggsong file if you've already created the .mogg file for your custom.
+
+When hitting **Compile Full Song**, the program will grab all fields as data and feed them into SoX to make a multitrack .ogg file. This step can take anywhere from 30 - 90 seconds (more or less depending on song length). Please be aware your files will be named after the folder it's in. It's assumed that you want to play this right away, so please name the folder after your song (no spaces allowed, and should all be lowercase).
 
 After the multitrack ogg is created, it will get fed into ogg2mogg and then placed into your folder.
 
