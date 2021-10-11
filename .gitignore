@@ -17,3 +17,6 @@ build/Amplitude Custom Suite/Tree-02.toc
 build/Amplitude Custom Suite/warn-Amplitude Custom Suite.txt
 build/Amplitude Custom Suite/xref-Amplitude Custom Suite.html
 *.pyc
+silence/
+temp/
+releases/

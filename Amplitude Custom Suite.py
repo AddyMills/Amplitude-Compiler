@@ -81,11 +81,14 @@ while progEnd != -1:  # Keep window open until program is closed
         elif event == "Save As":
             compF.saveFileAs(songData)
             window.close()
-        elif event == "Compile!":
+        elif event == "Compile Full Song":
             songData = compF.modSongMetaData(songData, values)
             compF.compGameData(songData)
             window.close()
             progEnd = -1
+        elif event == "Export Moggsong":
+            compF.makeMoggSong(songData)
+            window.close()
         else:
             progEnd = -1
         
@@ -126,11 +129,14 @@ while progEnd != -1:  # Keep window open until program is closed
         elif event == "Save As":
             compF.saveFileAs(songData)
             window.close()
-        elif event == "Compile!":
+        elif event == "Compile Full Song":
             songData = compF.modSongGameData(songData, values)
             compF.compGameData(songData)
             window.close()
             progEnd = -1
+        elif event == "Export Moggsong":
+            compF.makeMoggSong(songData)
+            window.close()
         else:
             progEnd = -1
 

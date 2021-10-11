@@ -9,6 +9,7 @@ class instCount:
   guitar = 0
   synth = 0
   vox = 0
+  fx = 0
     
 
 numInst = instCount() #Keep track of instruments. Drums, Bass, Guitar, Synth, Vocals
@@ -29,6 +30,9 @@ def countInst(inst):
     elif inst.lower() == 'vox':
         numInst.vox += 1
         return numInst.vox
+    elif inst.lower() == 'fx':
+        numInst.fx += 1
+        return numInst.fx
     return -1
 
 def createTrack(num, inst):

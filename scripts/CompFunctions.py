@@ -8,12 +8,13 @@ import soundfile
 import subprocess
 import sys
 
-listboxSize = (6, 5)
+listboxSize = (6, 6)
 numBoxSize = (4, 1)
 prevBoxSize = (7, 1)
-instrumentsList = ['bass', 'drums', 'guitar', 'synth', 'vocals']
+instrumentsList = ['bass', 'drums', 'fx', 'guitar', 'synth', 'vocals']
 defaultList = [None, None, None, None, None, None]
-compile_text = "Compile!"
+compile_text = "Compile Full Song"
+moggsong_gen_text = "Export Moggsong"
 open_text = "Browse"
 #inputRightClick = ['&Right', ['Insert 16-bit 44,100 Hz', 'Insert 24-bit 44,100 Hz', 'Insert 16-bit 48,000 Hz', 'Insert 24-bit 48,000 Hz']]
 
@@ -204,7 +205,7 @@ def compMetaDataGUI(songData):
               [sg.Text('Compile Folder', size=textSize, justification='right'),
                sg.Input(default_text=songData.save_path, expand_x=True, key='save_path'),
                sg.FolderBrowse(button_text=open_text)],
-              [sg.Button(button_text=compile_text, expand_x=True)]
+              [sg.Button(button_text=moggsong_gen_text, button_color = "#cc6600", expand_x=True),sg.Button(button_text=compile_text, button_color="green", expand_x=True)]
               ]
     return layout
 
@@ -272,7 +273,7 @@ def compSongDataGUI(songData):
               [sg.Text('Compile Folder', size=textSize, justification='right'),
                sg.Input(default_text=songData.save_path, expand_x=True, key='save_path'),
                sg.FolderBrowse(button_text=open_text)],
-              [sg.Button(button_text=compile_text, expand_x=True)]
+              [sg.Button(button_text=moggsong_gen_text, button_color = "#cc6600", expand_x=True),sg.Button(button_text=compile_text, button_color="green", expand_x=True)]
               ]
     return layout
 
