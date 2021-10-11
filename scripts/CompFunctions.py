@@ -411,7 +411,7 @@ def makeMoggSong(songData):
             print("(song_info\n\t(length " + lessCountin(songData.length,
                                                          int(countin) + 1) + ":0:0)\n\t(countin " + countinraw + ")\n)")
         print("")
-        print("(tracks\n\t(")
+        print("(tracks\n   (")
         channel_counter = 0
         track_counter = 0
         flow_counter = 0
@@ -419,23 +419,23 @@ def makeMoggSong(songData):
         vols = ""
         for x in trackData:
             if track_counter < 6:
-                print("\t\t(" + tracknames[track_counter].lower(),
+                print("      (" + tracknames[track_counter].lower(),
                       "(" + channelCount(channel_counter, x) + ") event:/SONG_BUS)")
             else:
                 if songData.ps4mode == True:
                     if flow_counter < 3:
-                        print("\t\t(" + "freestyle",
+                        print("      (" + "freestyle",
                               "(" + channelCount(channel_counter, x) + ") event:/FREESTYLE_FX_1)")
                         flow_counter += 1
                     else:
-                        print("\t\t(" + "bg_click", "(" + channelCount(channel_counter, x) + ") event:/SONG_BUS)")
+                        print("      (" + "bg_click", "(" + channelCount(channel_counter, x) + ") event:/SONG_BUS)")
                 else:
                     if flow_counter < 1:
-                        print("\t\t(" + "freestyle",
+                        print("      (" + "freestyle",
                               "(" + channelCount(channel_counter, x) + ") event:/FREESTYLE_FX_1)")
                         flow_counter += 1
                     else:
-                        print("\t\t(" + "bg_click", "(" + channelCount(channel_counter, x) + ") event:/SONG_BUS)")
+                        print("      (" + "bg_click", "(" + channelCount(channel_counter, x) + ") event:/SONG_BUS)")
             if x.channels == 2:
                 pans += "-1.0 1.0   "
                 vols += ((str(attData[track_counter]) + " ") * 2 + "  ")
@@ -452,13 +452,13 @@ def makeMoggSong(songData):
                 ";        1TRK1      2TRK2      3TRK3     4TRK4      5TRK5      6TRK6      7FREE1    7FREE2    7FREE3      8BG")
         else:
             print(";        1TRK1      2TRK2      3TRK3     4TRK4      5TRK5      6TRK6      7FREE1      8BG")
-        print("(pans (" + pans + "))")
-        print("(vols (" + vols + "))")
+        print("(pans (" + pans.strip() + "))")
+        print("(vols (" + vols.strip() + "))")
         print("\n;-------------------- ATTENUATION --------------")
         if songData.ps4mode == True:
-            print("(active_track_db (0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
+            print("(active_track_db 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
         else:
-            print("active_track_db (0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
+            print("(active_track_db 0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
         print("\n; Amplitude settings\n(arena_path ConstructoP2)")
         # Insert score_goal algorithm here
         print(
