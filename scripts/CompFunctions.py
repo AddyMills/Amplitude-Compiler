@@ -1,5 +1,6 @@
 from collections import namedtuple
-from mido import Message, MidiFile, MidiTrack, MetaMessage
+from mido import MidiFile
+from scripts import MidiChecks as mc
 import PySimpleGUI as sg
 import json
 import os
@@ -16,7 +17,9 @@ defaultList = [None, None, None, None, None, None]
 compile_text = "Compile Full Song"
 moggsong_gen_text = "Export Moggsong"
 open_text = "Browse"
-#inputRightClick = ['&Right', ['Insert 16-bit 44,100 Hz', 'Insert 24-bit 44,100 Hz', 'Insert 16-bit 48,000 Hz', 'Insert 24-bit 48,000 Hz']]
+
+
+# inputRightClick = ['&Right', ['Insert 16-bit 44,100 Hz', 'Insert 24-bit 44,100 Hz', 'Insert 16-bit 48,000 Hz', 'Insert 24-bit 48,000 Hz']]
 
 
 def customDataDecoder(songData):
@@ -129,7 +132,7 @@ def midStartGui():
                sg.Text('3', size=textSize, justification='center'),
                sg.Text('4', size=textSize, justification='center'),
                sg.Text('5', size=textSize, justification='center'),
-               sg.Text('6', size=textSize, justification='center'),],
+               sg.Text('6', size=textSize, justification='center'), ],
               [sg.Listbox(values=instrumentsList, default_values=defaultList[0], key='track1', size=listboxSize,
                           no_scrollbar=True),
                sg.Listbox(values=instrumentsList, default_values=defaultList[1], key='track2', size=listboxSize,
@@ -205,7 +208,8 @@ def compMetaDataGUI(songData):
               [sg.Text('Compile Folder', size=textSize, justification='right'),
                sg.Input(default_text=songData.save_path, expand_x=True, key='save_path'),
                sg.FolderBrowse(button_text=open_text)],
-              [sg.Button(button_text=moggsong_gen_text, button_color = "#cc6600", expand_x=True),sg.Button(button_text=compile_text, button_color="green", expand_x=True)]
+              [sg.Button(button_text=moggsong_gen_text, button_color="#cc6600", expand_x=True),
+               sg.Button(button_text=compile_text, button_color="green", expand_x=True)]
               ]
     return layout
 
@@ -273,7 +277,8 @@ def compSongDataGUI(songData):
               [sg.Text('Compile Folder', size=textSize, justification='right'),
                sg.Input(default_text=songData.save_path, expand_x=True, key='save_path'),
                sg.FolderBrowse(button_text=open_text)],
-              [sg.Button(button_text=moggsong_gen_text, button_color = "#cc6600", expand_x=True),sg.Button(button_text=compile_text, button_color="green", expand_x=True)]
+              [sg.Button(button_text=moggsong_gen_text, button_color="#cc6600", expand_x=True),
+               sg.Button(button_text=compile_text, button_color="green", expand_x=True)]
               ]
     return layout
 
@@ -373,7 +378,7 @@ def getAudioData(songData):
             channels += data.channels
         except:
             pass
-            #print("Track not found... Continuing")
+            # print("Track not found... Continuing")
     return tracks, att, channels
 
 
@@ -386,12 +391,20 @@ def channelCount(x, tData):
     return y
 
 
-def makeMoggSong(songData):
+def makeMoggSong(songData, noteCount):
     original_stdout = sys.stdout  # Save a reference to the original standard output
-    forward_slash = []
 
+    easyMult = [0.204, 0.254]
+    medMult = [0.219, 0.304]
+    hardMult = [0.239, 0.343]
+    expMult = [0.2699, 0.3667, 0.4117]
+    multi = easyMult + medMult + hardMult + expMult
+    score_goal = []
     song_name = getSongName(songData)
     save_file = getSaveFilePath(songData, ".moggsong")
+    for x in range(0, len(multi)):
+        score_goal.append(round(noteCount[0] * multi[x]))
+
     print("\nSaving .moggsong file to " + save_file)
     with open(save_file, "w") as f:
         sys.stdout = f
@@ -439,10 +452,10 @@ def makeMoggSong(songData):
                         print("      (" + "bg_click", "(" + channelCount(channel_counter, x) + ") event:/SONG_BUS)")
             if x.channels == 2:
                 pans += "-1.0 1.0   "
-                vols += ((str(attData[track_counter]) + " ") * 2 + "  ")
+                vols += ("  {0:.1f}  {0:.1f}  ".format(float(attData[track_counter])))
             elif x.channels == 1:
                 pans += "   0.0   "
-                vols += ("  " + str(attData[track_counter]) + "   ")
+                vols += ("  {:.1f}   ".format(float(attData[track_counter])))
             track_counter += 1
             channel_counter += x.channels
         print("\t)")
@@ -461,7 +474,12 @@ def makeMoggSong(songData):
         else:
             print("(active_track_db 0.0  0.0  0.0  0.0  0.0  0.0  0.0)")
         print("\n; Amplitude settings\n(arena_path ConstructoP2)")
-        # Insert score_goal algorithm here
+
+        print(
+            "(score_goal\n  ({0: 5d}{1: 5d}{8: 5d})\n  ({2: 5d}{3: 5d}{8: 5d})\n  ({4: 5d}{5: 5d}{8: 5d})\n  ({6: 5d}{7: 5d}{8: 5d})".format(
+                score_goal[0], score_goal[1], score_goal[2], score_goal[3], score_goal[4], score_goal[5], score_goal[6],
+                score_goal[7], score_goal[8]))
+        print(")")
         print(
             "\n(tunnel_scale 1.0)  ; fudge factor controlling speed of arena travel \n(enable_order (1 2 3 4 5 6)) ; 1-based")
         print("\n; first bar of each section \n(section_start_bars", lessCountin(songData.gates[0], countin),
@@ -485,6 +503,7 @@ def makeMoggSong(songData):
     print("Save Complete")
     return
 
+
 def getSongName(songData):
     forward_slash = []
     for x in range(0, len(songData.save_path)):
@@ -492,6 +511,7 @@ def getSongName(songData):
             forward_slash.append(x)
     song_name = songData.save_path[forward_slash[-1] + 1:]
     return song_name
+
 
 def getSaveFilePath(songData, filetype):
     song_name = getSongName(songData)
@@ -501,13 +521,22 @@ def getSaveFilePath(songData, filetype):
         save_file = songData.save_path + "/" + song_name + filetype
     return save_file
 
+
 def moveMidi(songData):
     mid = MidiFile(songData.midi_file, clip=True)
     save_file = getSaveFilePath(songData, ".mid")
     print("\nSaving Midi File to " + save_file)
     mid.save(save_file)
+    print("\nSaving dummy Forge Midi File to " + save_file)
+    if songData.ps4mode == True:
+        print("\nSaving dummy Forge Midi File to " + save_file + "_ps4")
+        mid.save(save_file + "_ps4")
+    else:
+        print("\nSaving dummy Forge Midi File to " + save_file + "_ps3")
+        mid.save(save_file + "_ps3")
     print("Save Complete")
     return
+
 
 def copyAudioToTemp(tracksData):
     for x in tracksData:
@@ -515,11 +544,38 @@ def copyAudioToTemp(tracksData):
             shutil.copy(x, "./temp")
         except:
             pass
-            
+
+
+def printIssues(issues):
+    multiLine = [[sg.Output(size=(100, 20))], [sg.Button('Stop & Exit', key="Exit", button_color="red", expand_x=True),
+                                               sg.Button('Acknowledge & Continue', key="Continue", button_color="green",
+                                                         expand_x=True)]]
+    mlWindow = sg.Window('MIDI Sanity Check', multiLine)
+    initialData = 0
+    while True:
+        if initialData == 0:
+            mlWindow.read(timeout=1, timeout_key="__TIMEOUT__")
+            for x in issues:
+                print(x)
+                mlWindow.Refresh()
+            initialData = 1
+        else:
+            event, values = mlWindow.read()
+            if event == "Continue":
+                break
+            elif event == "Exit":
+                exit()
+            elif event == "WIN_CLOSED":
+                exit()
+
+    window.close()
+    return
+
+
 def programProgress(childProg, seconds):
-    print(seconds,"seconds elapsed.")
+    print(seconds, "seconds elapsed.")
     try:
-        childProg.wait(timeout = 5)
+        childProg.wait(timeout=5)
     except subprocess.TimeoutExpired:
         seconds += 5
         programProgress(childProg, seconds)
@@ -527,24 +583,31 @@ def programProgress(childProg, seconds):
         print("Failed to make multitrack OGG file.")
     return
 
+
 def createMoggAudio(songData):
     tracksData = [songData.track1, songData.track2, songData.track3, songData.track4, songData.track5, songData.track6,
                   songData.flow1, songData.flow2, songData.flow3, songData.bg_track]
     print("\nCreating single multitrack ogg file")
     if songData.ps4mode == True:
-        makeogg = subprocess.Popen(['./executables/sox-14.4.2/sox.exe','-M',tracksData[0],tracksData[1],tracksData[2],tracksData[3],tracksData[4],tracksData[5],tracksData[6],tracksData[7],tracksData[8],tracksData[9],'-C 5', './temp/temp.ogg'])
+        makeogg = subprocess.Popen(
+            ['./executables/sox-14.4.2/sox.exe', '-M', tracksData[0], tracksData[1], tracksData[2], tracksData[3],
+             tracksData[4], tracksData[5], tracksData[6], tracksData[7], tracksData[8], tracksData[9], '-C 5',
+             './temp/temp.ogg'])
     else:
-        makeogg = subprocess.Popen(['./executables/sox-14.4.2/sox.exe','-M',tracksData[0],tracksData[1],tracksData[2],tracksData[3],tracksData[4],tracksData[5],tracksData[6],tracksData[9],'-C 5', './temp/temp.ogg'])
+        makeogg = subprocess.Popen(
+            ['./executables/sox-14.4.2/sox.exe', '-M', tracksData[0], tracksData[1], tracksData[2], tracksData[3],
+             tracksData[4], tracksData[5], tracksData[6], tracksData[9], '-C 5', './temp/temp.ogg'])
     programProgress(makeogg, 0)
     if makeogg.returncode == 0:
         print("Success!")
 
     print("\nConverting ogg to mogg file")
-    makemogg = subprocess.Popen(['./executables/ogg2mogg/ogg2mogg.exe', './temp/temp.ogg', getSaveFilePath(songData, ".mogg")])
+    makemogg = subprocess.Popen(
+        ['./executables/ogg2mogg/ogg2mogg.exe', './temp/temp.ogg', getSaveFilePath(songData, ".mogg")])
     makemogg.wait()
     if makemogg.returncode == 0:
         print("Success!")
-        
+
     print("\nCleaning temporary files.")
     for root, dirs, files in os.walk('./temp'):
         for f in files:
@@ -554,8 +617,16 @@ def createMoggAudio(songData):
 
     return
 
+def exportMoggSong(songData):
+    totalNotes, issues = mc.midiSanityCheck(songData.midi_file)
+    makeMoggSong(songData, totalNotes)
+    return
+
 def compGameData(songData):
-    makeMoggSong(songData)
+    totalNotes, issues = mc.midiSanityCheck(songData.midi_file)
+    if len(issues) != 0:
+        printIssues(issues)
+    makeMoggSong(songData, totalNotes)
     moveMidi(songData)
     createMoggAudio(songData)
     return

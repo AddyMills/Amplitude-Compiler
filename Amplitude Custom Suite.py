@@ -1,12 +1,10 @@
 # GUI Test
-import subprocess
+
 import PySimpleGUI as sg
-from mido import Message, MidiFile, MidiTrack, MetaMessage
-import sys
 import scripts.AmpInclude as ampInclude
 import scripts.CompFunctions as compF
 import scripts.CompClasses as compC
-import json
+
 
 songData = compC.defVal()
 
@@ -87,7 +85,7 @@ while progEnd != -1:  # Keep window open until program is closed
             window.close()
             progEnd = -1
         elif event == "Export Moggsong":
-            compF.makeMoggSong(songData)
+            compF.exportMoggSong(songData)
             window.close()
         else:
             progEnd = -1
@@ -135,7 +133,7 @@ while progEnd != -1:  # Keep window open until program is closed
             window.close()
             progEnd = -1
         elif event == "Export Moggsong":
-            compF.makeMoggSong(songData)
+            compF.exportMoggSong(songData)
             window.close()
         else:
             progEnd = -1

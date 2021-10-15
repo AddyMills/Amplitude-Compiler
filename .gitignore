@@ -20,3 +20,6 @@ build/Amplitude Custom Suite/xref-Amplitude Custom Suite.html
 silence/
 temp/
 releases/
+.idea/
+scripts/SanityCheck.txt
+misc/
