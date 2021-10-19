@@ -1,13 +1,15 @@
-from collections import namedtuple
-from mido import MidiFile
-from scripts import MidiChecks as mc
-import PySimpleGUI as sg
 import json
 import os
 import shutil
-import soundfile
 import subprocess
 import sys
+from collections import namedtuple
+
+import PySimpleGUI as sg
+import soundfile
+from mido import MidiFile
+
+from scripts import MidiChecks as mc
 
 listboxSize = (6, 6)
 numBoxSize = (4, 1)
@@ -521,30 +523,29 @@ def getSaveFilePath(songData, filetype):
         save_file = songData.save_path + "/" + song_name + filetype
     return save_file
 
+def saveDummies(save_path, ext):
+    dummyExts = [".mid",".png",".png.dta_dta"]
+    for x in dummyExts:
+        dummyExtension = x+ext
+        dummyPath = save_path+dummyExtension
+        dummyFile = open(dummyPath, 'w')
+        dummyFile.close()
+        shutil.copyfile("./dummy/dummy"+dummyExtension,dummyPath)
+    return
 
 def moveMidi(songData):
     mid = MidiFile(songData.midi_file, clip=True)
     save_file = getSaveFilePath(songData, ".mid")
     print("\nSaving Midi File to " + save_file)
     mid.save(save_file)
-    print("\nSaving dummy Forge Midi File to " + save_file)
+    save_file = getSaveFilePath(songData, "")
+    print("\nSaving dummy files to folder")
     if songData.ps4mode == True:
-        print("\nSaving dummy Forge Midi File to " + save_file + "_ps4")
-        mid.save(save_file + "_ps4")
+        saveDummies(save_file, "_ps4")
     else:
-        print("\nSaving dummy Forge Midi File to " + save_file + "_ps3")
-        mid.save(save_file + "_ps3")
+        saveDummies(save_file, "_ps3")
     print("Save Complete")
     return
-
-
-def copyAudioToTemp(tracksData):
-    for x in tracksData:
-        try:
-            shutil.copy(x, "./temp")
-        except:
-            pass
-
 
 def printIssues(issues):
     multiLine = [[sg.Output(size=(100, 20))], [sg.Button('Stop & Exit', key="Exit", button_color="red", expand_x=True),
@@ -568,7 +569,7 @@ def printIssues(issues):
             elif event == "WIN_CLOSED":
                 exit()
 
-    window.close()
+    mlWindow.close()
     return
 
 
@@ -617,10 +618,12 @@ def createMoggAudio(songData):
 
     return
 
+
 def exportMoggSong(songData):
     totalNotes, issues = mc.midiSanityCheck(songData.midi_file)
     makeMoggSong(songData, totalNotes)
     return
+
 
 def compGameData(songData):
     totalNotes, issues = mc.midiSanityCheck(songData.midi_file)

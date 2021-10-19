@@ -1,13 +1,12 @@
 # GUI Test
 
 import PySimpleGUI as sg
-import scripts.AmpInclude as ampInclude
-import scripts.CompFunctions as compF
-import scripts.CompClasses as compC
 
+import scripts.AmpInclude as ampInclude
+import scripts.CompClasses as compC
+import scripts.CompFunctions as compF
 
 songData = compC.defVal()
-
 
 showWindow = 0
 progEnd = 0
@@ -41,10 +40,10 @@ while progEnd != -1:  # Keep window open until program is closed
             progEnd = -1
             argsMid = []
             for x in range(0, 6):
-                curTrack = 'track'+str(x+1)
+                curTrack = 'track' + str(x + 1)
                 argsMid.append(values[curTrack][0])
             ampInclude.createMIDIfile(argsMid, sg.popup_get_file("", save_as=True, no_window=True,
-                                    file_types=(('MIDI Files', '*.mid'),)))
+                                                                 file_types=(('MIDI Files', '*.mid'),)))
         elif event == "Metadata":
             progEnd = 2
             window.close()
@@ -53,8 +52,8 @@ while progEnd != -1:  # Keep window open until program is closed
             window.close()
         else:
             progEnd = -1
-            
-    elif progEnd == 2: #Compiler: Metadata Screen
+
+    elif progEnd == 2:  # Compiler: Metadata Screen
         layout = compF.compMetaDataGUI(songData)
 
         window = sg.Window('Amplitude 2016 Compiler', layout)
@@ -63,10 +62,10 @@ while progEnd != -1:  # Keep window open until program is closed
 
         songData = compF.modSongMetaData(songData, values)
 
-        #print(event, values)
+        # print(event, values)
 
-        #print(songData.preview_start)
-        
+        # print(songData.preview_start)
+
         if event == "Game Data":
             progEnd = 3
             window.close()
@@ -89,8 +88,8 @@ while progEnd != -1:  # Keep window open until program is closed
             window.close()
         else:
             progEnd = -1
-        
-    elif progEnd == 3: #Compiler: Game Data Screen
+
+    elif progEnd == 3:  # Compiler: Game Data Screen
         layout = compF.compSongDataGUI(songData)
 
         window = sg.Window('Amplitude 2016 Compiler', layout)
@@ -101,8 +100,8 @@ while progEnd != -1:  # Keep window open until program is closed
 
         print(event, values)
 
-        #print(songData.preview_start)
-        
+        # print(songData.preview_start)
+
         if event == "Metadata":
             progEnd = 2
             window.close()
@@ -139,6 +138,5 @@ while progEnd != -1:  # Keep window open until program is closed
             progEnd = -1
 
         window.close()
-
 
 window.close()

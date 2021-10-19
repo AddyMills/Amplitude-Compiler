@@ -24,7 +24,8 @@ def diffCheck(time, diff, msg, mid, diffName, tempo, timeSigNum, x):
             diff.append(time)
     elif time == diff[-1]:
         issue = "Track {2}: More than 1 note found on {0} difficulty at {1} (MBT {3}).".format(diffName, timeMinSec,
-                                                                                             mid.tracks[x].name, timeMBT)
+                                                                                               mid.tracks[x].name,
+                                                                                               timeMBT)
 
     return issue
 
@@ -84,7 +85,7 @@ def midiSanityCheck(midPath):
         "T6": []
     }
     totalNotes = []
-    #print(mid.tracks[0].name)
+    # print(mid.tracks[0].name)
     for x in range(0, len(mid.tracks)):
         totalTime = 0
         diffEasy = []
@@ -110,14 +111,15 @@ def midiSanityCheck(midPath):
                     elif msg.note in hardNotes:
                         issues.append(diffCheck(totalTime, diffHard, msg, mid, "Advanced", song_tempo, timeSigNum, x))
                     elif msg.note in mediumNotes:
-                        issues.append(diffCheck(totalTime, diffMedium, msg, mid, "Intermediate", song_tempo, timeSigNum, x))
+                        issues.append(
+                            diffCheck(totalTime, diffMedium, msg, mid, "Intermediate", song_tempo, timeSigNum, x))
                     elif msg.note in easyNotes:
                         issues.append(diffCheck(totalTime, diffEasy, msg, mid, "Beginner", song_tempo, timeSigNum, x))
                     elif msg.note < 80:
                         pass
                     else:
                         issues.append(unsupportedNote(totalTime, msg, mid, song_tempo,
-                                              timeSigNum, x))
+                                                      timeSigNum, x))
 
             elif mid.tracks[x].name.startswith("T7"):
                 pass
@@ -125,16 +127,16 @@ def midiSanityCheck(midPath):
                 if msg.type == "note_on":
                     if msg.note not in bg_clickNotes:
                         issues.append(unsupportedNote(totalTime, msg, mid, song_tempo,
-                                              timeSigNum, x))
+                                                      timeSigNum, x))
             elif mid.tracks[x].name == "WORLD":
                 if msg.type == "note_on":
                     if msg.note not in easyNotes:
                         issues.append(unsupportedNote(totalTime, msg, mid, song_tempo,
-                                              timeSigNum, x))
+                                                      timeSigNum, x))
                 if msg.type == "text":
                     if msg.text not in worldEvents:
                         issues.append(unsupportedEvent(totalTime, msg, mid, song_tempo,
-                                               timeSigNum, x))
+                                                       timeSigNum, x))
             try:
                 if issues[-1] == "":
                     issues.pop()
@@ -161,10 +163,10 @@ def midiSanityCheck(midPath):
             except:
                 totalNotes.append(trackNotes[key][notes])
 
-    #print(trackNotes)
-    #print(totalNotes)
-    #print(len(diffExpert))
-    #print(song_tempo)
+    # print(trackNotes)
+    # print(totalNotes)
+    # print(len(diffExpert))
+    # print(song_tempo)
 
     if ts > 1:
         issues.append(
@@ -176,8 +178,9 @@ def midiSanityCheck(midPath):
         pass
 
     if tempos > 1:
-        issues.append("{0} tempo change events found. Please be aware tempo changes are not supported by Amplitude.".format(
-            tempos))
+        issues.append(
+            "{0} tempo change events found. Please be aware tempo changes are not supported by Amplitude.".format(
+                tempos))
     elif tempos == 0:
         issues.append(
             "No tempo change events found. Although tempo is set by the moggsong file, please double check your MIDI file for completeness.")
