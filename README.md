@@ -51,6 +51,10 @@ After the multitrack ogg is created, it will get fed into ogg2mogg and then plac
 
 Temporary files can take up to 70MB of space (can be larger for long, multitrack songs), but are deleted after every compile.
 
+## Examples
+
+For examples of customs I've created, please see my YouTube channel! https://www.youtube.com/channel/UC0noy5mV7GZBWWJAvOEzG-Q
+
 ## Future content
 
 * Allow dragging and dropping of files
