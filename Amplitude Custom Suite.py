@@ -98,7 +98,7 @@ while progEnd != -1:  # Keep window open until program is closed
 
         songData = compF.modSongGameData(songData, values)
 
-        print(event, values)
+        # print(event, values)
 
         # print(songData.preview_start)
 

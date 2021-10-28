@@ -16,7 +16,8 @@ def diffCheck(time, diff, msg, mid, diffName, tempo, timeSigNum, x):
     timeSecs, timeMinSec, timeMBT = timeConvert(time, mid.ticks_per_beat, tempo, timeSigNum)
     if time not in diff:
         try:
-            if time - diff[-1] < 30:
+            if time - diff[-1] < mid.ticks_per_beat/16:
+                #print(time, time - diff[-1],mid.ticks_per_beat/16, mid.ticks_per_beat, diff[-1])
                 issue = "Track {2}: Note {0} at {1} (MBT {3}) is less than 1/64th note from previous note.".format(
                     msg.note, timeMinSec, mid.tracks[x].name, timeMBT)
             diff.append(time)
@@ -105,8 +106,12 @@ def midiSanityCheck(midPath):
                     timeSigNum = msg.numerator
                     # print(timeSigNum)
             elif mid.tracks[x].name.startswith(("T1", "T2", "T3", "T4", "T5", "T6")):
+                #if mid.tracks[x].name.startswith(("T5")):
+                    #print(totalTime, msg)
                 if msg.type == "note_on":
-                    if msg.note in expertNotes:
+                    if msg.velocity == 0:
+                        pass
+                    elif msg.note in expertNotes:
                         issues.append(diffCheck(totalTime, diffExpert, msg, mid, "Expert", song_tempo, timeSigNum, x))
                     elif msg.note in hardNotes:
                         issues.append(diffCheck(totalTime, diffHard, msg, mid, "Advanced", song_tempo, timeSigNum, x))

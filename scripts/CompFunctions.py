@@ -553,7 +553,7 @@ def printIssues(issues):
                                                          expand_x=True)]]
     mlWindow = sg.Window('MIDI Sanity Check', multiLine)
     initialData = 0
-    while True:
+    while initialData < 2:
         if initialData == 0:
             mlWindow.read(timeout=1, timeout_key="__TIMEOUT__")
             for x in issues:
@@ -563,7 +563,8 @@ def printIssues(issues):
         else:
             event, values = mlWindow.read()
             if event == "Continue":
-                break
+                mlWindow.close()
+                return
             elif event == "Exit":
                 exit()
             elif event == "WIN_CLOSED":
