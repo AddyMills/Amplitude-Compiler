@@ -490,11 +490,11 @@ def makeMoggSong(songData, noteCount):
         print("(title \"{}\")".format(songData.title))
         if songData.title_short != '':
             print("(title_short \"" + songData.title_short + "\")")
-        print("(artist \"" + songData.artist + "\")")
         if songData.artist_short == "":
-            print("(artist_short \"" + songData.artist + "\")")
+            print("(artist \"" + songData.artist + "\")")
         else:
-            print("(artist_short \"" + songData.artist_short + "\")")
+            print("(artist \"" + songData.artist_short + "\")")
+        print("(artist_short \"" + songData.artist + "\")")
         print("(desc \"" + songData.desc + "\")")
         print("(unlock_requirement unlock_requirement_playcount)")
         print("(bpm " + songData.bpm + ")\n")
