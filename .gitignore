@@ -24,3 +24,5 @@ releases/
 scripts/SanityCheck.txt
 misc/
 dummy/
+build/
+dist/

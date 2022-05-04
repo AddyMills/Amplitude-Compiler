@@ -1,0 +1,3 @@
+mido==1.2.10
+PySimpleGUI==4.59.0
+SoundFile==0.10.3.post1
