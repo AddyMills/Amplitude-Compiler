@@ -1,5 +1,7 @@
 # GUI Test
 
+import sys
+import json
 import PySimpleGUI as sg
 
 import scripts.AmpInclude as ampInclude
@@ -10,6 +12,13 @@ songData = compC.defVal()
 
 showWindow = 0
 progEnd = 0
+ampProjectFile = None
+
+if len(sys.argv) == 2:
+    if sys.argv[1].lower().endswith(".ampproj"):
+        ampProjectFile = sys.argv[1]
+        progEnd = 2
+
 
 while progEnd != -1:  # Keep window open until program is closed
     if progEnd == 0:  # Program selection screen
@@ -54,12 +63,26 @@ while progEnd != -1:  # Keep window open until program is closed
             progEnd = -1
 
     elif progEnd == 2:  # Compiler: Metadata Screen
+        if ampProjectFile != None:
+            print("Loading project file " + ampProjectFile)
+            try:
+                with open(ampProjectFile, 'r') as infile:
+                    songData_dummy = json.loads(infile.read(), object_hook=compF.customDataDecoder)
+                    songData = compF.loadAmpFile(songData, songData_dummy)
+                    songData_dummy = None
+                    songData.save_file = ampProjectFile
+            except Exception as e:
+                print("Error loading file")
+                print(e)
+            finally:
+                ampProjectFile = None
+        
         layout = compF.compMetaDataGUI(songData)
 
         window = sg.Window('Amplitude 2016 Compiler', layout)
 
         event, values = window.read()
-
+  
         songData = compF.modSongMetaData(songData, values)
 
         # print(event, values)
