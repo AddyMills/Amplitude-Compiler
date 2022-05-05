@@ -8,6 +8,13 @@ import scripts.AmpInclude as ampInclude
 import scripts.CompClasses as compC
 import scripts.CompFunctions as compF
 
+if getattr(sys, 'frozen', False):
+    application_path = os.path.dirname(os.path.abspath(sys.executable))
+elif __file__:
+    application_path = os.path.dirname(os.path.abspath(__file__))
+
+os.chdir(application_path)
+
 songData = compC.defVal()
 
 showWindow = 0
